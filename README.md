@@ -1,0 +1,1 @@
+# network-outage-detector
