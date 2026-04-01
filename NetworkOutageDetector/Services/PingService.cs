@@ -4,23 +4,29 @@ namespace NetworkOutageDetector.Services;
 
 public sealed class PingService
 {
-    private readonly string _target;
     private readonly int _timeoutMs;
 
-    public PingService(string target, int timeoutMs = 500)
+    public PingService(int timeoutMs = 500)
     {
-        _target = target;
         _timeoutMs = timeoutMs;
     }
 
-    public string Target => _target;
+    /// <summary>
+    /// Pings all targets in parallel. Returns true if ANY target responds (network is up).
+    /// </summary>
+    public async Task<bool> PingAllAsync(string[] targets)
+    {
+        var tasks = targets.Select(t => PingOneAsync(t));
+        var results = await Task.WhenAll(tasks);
+        return results.Any(r => r);
+    }
 
-    public async Task<bool> PingAsync()
+    private async Task<bool> PingOneAsync(string target)
     {
         using var pinger = new Ping();
         try
         {
-            var reply = await pinger.SendPingAsync(_target, _timeoutMs);
+            var reply = await pinger.SendPingAsync(target, _timeoutMs);
             return reply.Status == IPStatus.Success;
         }
         catch (PingException)

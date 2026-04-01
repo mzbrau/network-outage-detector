@@ -4,12 +4,21 @@ namespace NetworkOutageDetector;
 
 class Program
 {
+    static readonly string[] DefaultTargets = ["8.8.8.8", "1.1.1.1"];
+
     static async Task Main(string[] args)
     {
-        var target = ParseTarget(args);
+        var targets = ParseTargets(args);
+        if (targets.Length == 0)
+        {
+            Console.Error.WriteLine("Error: No valid targets specified.");
+            Environment.Exit(1);
+            return;
+        }
+        var targetsDisplay = string.Join(", ", targets);
 
         using var output = new OutputService();
-        var pingService = new PingService(target);
+        var pingService = new PingService();
         var tracker = new OutageTracker(output);
         var sessionStartUtc = DateTime.UtcNow;
         var reporter = new HourlyReporter(output, tracker, sessionStartUtc);
@@ -21,8 +30,8 @@ class Program
             cts.Cancel();
         };
 
-        output.Log($"Network Outage Detector started. Target: {target}");
-        output.Log($"Pinging {target} every 1s (timeout: 500ms, threshold: 3 failures)");
+        output.Log($"Network Outage Detector started. Targets: {targetsDisplay}");
+        output.Log($"Pinging every 1s (timeout: 500ms, threshold: 3 failures)");
         output.Log("Press Ctrl+C to stop.");
         output.LogBlank();
 
@@ -31,7 +40,7 @@ class Program
             using var timer = new PeriodicTimer(TimeSpan.FromSeconds(1));
             while (await timer.WaitForNextTickAsync(cts.Token))
             {
-                var success = await pingService.PingAsync();
+                var success = await pingService.PingAllAsync(targets);
                 var now = DateTime.UtcNow;
 
                 tracker.RecordResult(success, now);
@@ -47,20 +56,19 @@ class Program
         output.Log("Shutting down.");
     }
 
-    private static string ParseTarget(string[] args)
+    private static string[] ParseTargets(string[] args)
     {
-        const string defaultTarget = "8.8.8.8";
-
         for (int i = 0; i < args.Length; i++)
         {
-            if (args[i] is "--target" or "-t" && i + 1 < args.Length)
-                return args[i + 1];
+            if (args[i] is "--targets" && i + 1 < args.Length)
+                return args[i + 1].Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
         }
 
-        // First positional argument
-        if (args.Length > 0 && !args[0].StartsWith('-'))
-            return args[0];
+        // Positional arguments
+        var positional = args.Where(a => !a.StartsWith('-')).ToArray();
+        if (positional.Length > 0)
+            return positional;
 
-        return defaultTarget;
+        return DefaultTargets;
     }
 }
