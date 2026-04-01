@@ -66,7 +66,8 @@ public sealed class OutputService : IDisposable
         _fileLoggingFailed = true;
         _fileWriter?.Dispose();
         _fileWriter = null;
-        Console.WriteLine("[WARNING] File logging unavailable — continuing with console only.");
+        var timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        Console.WriteLine($"[{timestamp}] [WARNING] File logging unavailable — continuing with console only.");
     }
 
     public void Dispose()

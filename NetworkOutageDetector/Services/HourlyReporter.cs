@@ -32,7 +32,7 @@ public sealed class HourlyReporter
             if (rangeSeconds > 0)
             {
                 var downtime = _tracker.GetDowntime(rangeStart, hourEnd);
-                var downtimeSeconds = (int)downtime.TotalSeconds;
+                var downtimeSeconds = downtime.TotalSeconds;
                 var uptimePercent = ((rangeSeconds - downtimeSeconds) / rangeSeconds) * 100;
 
                 var localStart = rangeStart.ToLocalTime().ToString("HH:mm");
@@ -40,7 +40,7 @@ public sealed class HourlyReporter
 
                 _output.LogBlank();
                 _output.Log($"── Hourly Report ({localStart}–{localEnd}) ──────────────────");
-                _output.Log($"  Uptime: {uptimePercent:F1}% | Downtime: {downtimeSeconds}s");
+                _output.Log($"  Uptime: {uptimePercent:F1}% | Downtime: {(int)downtimeSeconds}s");
                 _output.Log("─────────────────────────────────────────────────");
             }
 

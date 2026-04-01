@@ -37,5 +37,9 @@ public sealed class PingService
         {
             return false;
         }
+        catch (ArgumentException)
+        {
+            return false;
+        }
     }
 }

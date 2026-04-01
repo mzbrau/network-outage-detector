@@ -7,8 +7,8 @@ public sealed class OutageTracker
     private readonly OutputService _output;
     private readonly int _failureThreshold;
     private readonly List<Outage> _outages = [];
-    private readonly List<DateTime> _recentFailures = [];
     private int _consecutiveFailures;
+    private DateTime _firstFailureInSequence;
     private Outage? _currentOutage;
 
     public OutageTracker(OutputService output, int failureThreshold = 3)
@@ -25,7 +25,7 @@ public sealed class OutageTracker
         if (success)
         {
             _consecutiveFailures = 0;
-            _recentFailures.Clear();
+            _firstFailureInSequence = default;
 
             if (_currentOutage is not null)
             {
@@ -37,13 +37,12 @@ public sealed class OutageTracker
         else
         {
             _consecutiveFailures++;
-            _recentFailures.Add(timestamp);
+            if (_consecutiveFailures == 1)
+                _firstFailureInSequence = timestamp;
 
             if (_consecutiveFailures == _failureThreshold && _currentOutage is null)
             {
-                // Outage start = timestamp of the first failed ping in the sequence
-                var outageStart = _recentFailures[_recentFailures.Count - _failureThreshold];
-                _currentOutage = new Outage { StartTime = outageStart };
+                _currentOutage = new Outage { StartTime = _firstFailureInSequence };
                 _outages.Add(_currentOutage);
                 _output.Log("⚠ OUTAGE STARTED");
             }
