@@ -1,0 +1,247 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 5rem 0 4rem;
+  background:
+    radial-gradient(circle at top left, rgba(72, 187, 255, 0.28), transparent 35%),
+    radial-gradient(circle at top right, rgba(119, 91, 255, 0.26), transparent 32%),
+    linear-gradient(180deg, #07111f 0%, #0d1b2f 52%, #111827 100%);
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+  gap: 2rem;
+  align-items: center;
+}
+
+.heroCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 0.45rem 0.8rem;
+  border: 1px solid rgba(133, 216, 255, 0.3);
+  border-radius: 999px;
+  background: rgba(11, 25, 44, 0.72);
+  color: #8edbff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.heroTitle {
+  margin: 0;
+  font-size: clamp(2.8rem, 5vw, 4.8rem);
+  line-height: 1.02;
+}
+
+.heroSubtitle {
+  max-width: 46rem;
+  margin: 0;
+  color: rgba(231, 241, 255, 0.82);
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+.statRow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+
+.statCard,
+.heroPanel,
+.featureCard,
+.docCard {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.25rem;
+  background: rgba(12, 20, 34, 0.72);
+  box-shadow: 0 18px 45px rgba(2, 8, 23, 0.28);
+  backdrop-filter: blur(12px);
+}
+
+.statCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1rem 1.1rem;
+}
+
+.statCard strong {
+  font-size: 1.05rem;
+}
+
+.statCard span,
+.panelFooter span {
+  color: rgba(221, 232, 249, 0.7);
+  font-size: 0.92rem;
+}
+
+.heroPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.35rem;
+}
+
+.panelHeader,
+.timelineItem,
+.panelFooter {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.panelHeader {
+  align-items: center;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(228, 238, 255, 0.82);
+  font-size: 0.95rem;
+}
+
+.panelStatus {
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(44, 182, 125, 0.16);
+  color: #86efac;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.timelineItem {
+  align-items: flex-start;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.timelineItem:last-of-type {
+  border-bottom: 0;
+}
+
+.timelineItem span {
+  min-width: 5.5rem;
+  color: #8edbff;
+  font-weight: 700;
+}
+
+.timelineItem p,
+.featureCard p,
+.docCard p,
+.sectionHeading p {
+  margin: 0;
+  color: rgba(221, 232, 249, 0.74);
+  line-height: 1.65;
+}
+
+.panelFooter {
+  margin-top: 0.25rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.panelFooter div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.panelFooter strong {
+  font-size: 1.5rem;
+}
+
+.mainContent {
+  background: linear-gradient(180deg, #0f172a 0%, #08111f 100%);
+}
+
+.sectionHeading {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1.5rem;
+}
+
+.sectionHeading h2 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.cardGrid,
+.docGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.featureCard,
+.docCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding: 1.35rem;
+}
+
+.featureCard h3,
+.docCard h3 {
+  margin: 0;
+}
+
+.docCard {
+  color: inherit;
+  text-decoration: none;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.docCard:hover {
+  color: inherit;
+  text-decoration: none;
+  transform: translateY(-4px);
+  border-color: rgba(142, 219, 255, 0.42);
+  box-shadow: 0 22px 50px rgba(7, 13, 30, 0.34);
+}
+
+.docCard span {
+  color: #8edbff;
+  font-weight: 600;
+}
+
+.docSection {
+  padding-bottom: 4rem;
+}
+
+@media screen and (max-width: 996px) {
+  .hero {
+    padding: 4rem 0 3rem;
+  }
+
+  .heroGrid,
+  .cardGrid,
+  .docGrid,
+  .statRow {
+    grid-template-columns: 1fr;
+  }
+
+  .heroTitle {
+    font-size: clamp(2.4rem, 10vw, 3.5rem);
+  }
+}

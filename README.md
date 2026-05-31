@@ -91,6 +91,16 @@ git push origin v1.0.0
 
 This triggers a GitHub Actions release with self-contained builds for Windows and macOS.
 
+## Documentation
+
+Project documentation now lives in the [Docusaurus site source](docs/README.md). To preview it locally:
+
+```bash
+cd docs
+npm install
+npm run start
+```
+
 ## License
 
 See [LICENSE](LICENSE) for details.
