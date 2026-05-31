@@ -27,7 +27,7 @@ const config: Config = {
         docs: {
           routeBasePath: 'docs',
           sidebarPath: './sidebars.ts',
-          editUrl: 'https://github.com/mzbrau/network-outage-detector/tree/main/',
+          editUrl: 'https://github.com/mzbrau/network-outage-detector/tree/main/docs/',
         },
         blog: false,
         theme: {
