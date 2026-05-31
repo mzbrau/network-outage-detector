@@ -1,0 +1,67 @@
+:root {
+  --ifm-color-primary: #62b7ff;
+  --ifm-color-primary-dark: #42a7ff;
+  --ifm-color-primary-darker: #319eff;
+  --ifm-color-primary-darkest: #0081ec;
+  --ifm-color-primary-light: #82c7ff;
+  --ifm-color-primary-lighter: #93d0ff;
+  --ifm-color-primary-lightest: #c4e6ff;
+  --ifm-background-color: #08111f;
+  --ifm-background-surface-color: #0f172a;
+  --ifm-navbar-background-color: rgba(8, 17, 31, 0.88);
+  --ifm-footer-background-color: #050b16;
+  --ifm-heading-color: #f8fbff;
+  --ifm-font-color-base: #e8f1ff;
+  --ifm-code-font-size: 95%;
+  --ifm-link-color: #8edbff;
+  --docusaurus-highlighted-code-line-bg: rgba(98, 183, 255, 0.14);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--ifm-background-color);
+}
+
+.navbar {
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.markdown h1,
+.markdown h2,
+.markdown h3 {
+  letter-spacing: -0.02em;
+}
+
+.theme-doc-sidebar-container {
+  border-right-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.menu__link--active,
+.breadcrumbs__link,
+.pagination-nav__label {
+  font-weight: 600;
+}
+
+[data-theme='dark'] {
+  --ifm-color-primary: #8edbff;
+  --ifm-color-primary-dark: #6fd0ff;
+  --ifm-color-primary-darker: #5fcaff;
+  --ifm-color-primary-darkest: #2ab8ff;
+  --ifm-color-primary-light: #ade6ff;
+  --ifm-color-primary-lighter: #bdeaff;
+  --ifm-color-primary-lightest: #ecf9ff;
+  --ifm-background-color: #08111f;
+  --ifm-background-surface-color: #0f172a;
+  --ifm-navbar-background-color: rgba(8, 17, 31, 0.88);
+  --ifm-footer-background-color: #050b16;
+  --ifm-font-color-base: #e8f1ff;
+  --docusaurus-highlighted-code-line-bg: rgba(98, 183, 255, 0.16);
+}
