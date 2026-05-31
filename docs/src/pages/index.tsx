@@ -61,7 +61,7 @@ export default function Home(): ReactNode {
                 <Link className="button button--primary button--lg" to="/docs/overview">
                   Read the docs
                 </Link>
-                <Link className="button button--secondary button--lg" to="https://github.com/mzbrau/network-outage-detector">
+                <Link className="button button--secondary button--lg" href="https://github.com/mzbrau/network-outage-detector">
                   View repository
                 </Link>
               </div>
